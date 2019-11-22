@@ -7,6 +7,7 @@ const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const passportSetup = require("./config/passport-setup");
 const keys = require("./config/keys");
+const dataRoutes=require('./routes/data');
 
 
 const app=express();
@@ -46,6 +47,8 @@ app.get("/", (req, res) => {
   res.render("home", { user: req.user });
 });
 
+app.use('/',dataRoutes);
+
 mongoose
     .connect(
         "mongodb+srv://victory_vivek:vivek123@book-cluster-od9xo.mongodb.net/InsertAndGetData?retryWrites=true&w=majority", {
@@ -54,6 +57,7 @@ mongoose
         }
     )
     .then(result => {
+        // console.log(result.db('InsertAndGetData').collection.find('user'));
         app.listen(8000, () => {
             console.log("db connected");
         });
