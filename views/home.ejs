@@ -76,8 +76,15 @@
             <br><br>
             <div id="table-data"></div>
         </main>
-        <% let getDataUrl="http://localhost:8000/get/data";
-        let setDataUrl="http://localhost:8000/set/data/"+user.googleId %>
+        <% let getDataUrl="http://localhost:8000/get/data"; %>
+        <%
+        let setDataUrl; 
+        if(user){
+            setDataUrl="http://localhost:8000/set/data/"+user.googleId
+        }else{
+            setDataUrl='';
+        }%>
+
         <script>
             $(document).ready(function(){
                 $("#get-data").click(function(){
@@ -100,6 +107,7 @@
 
                     $("#previous-year").val('');
                     $("#latest-year").val('');
+                    
                     $.post("<%= setDataUrl %>",{
                         previousYear:previousYear,
                         latestYear:latestYear

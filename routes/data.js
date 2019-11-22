@@ -20,6 +20,7 @@ router.get('/get/data',(req,res,next)=>{
 });
 
 router.post('/set/data/:googleId',(req,res,next)=>{
+    console.log('post clicked');
     const googleId=req.params.googleId;
     console.log('googleid',googleId)
     let previousYear=req.body.previousYear;
@@ -50,6 +51,7 @@ router.post('/set/data/:googleId',(req,res,next)=>{
                    latestYear:datamodel.latestYear
                 });
             });
+            
             return res.send(datamodelArray);
         }).catch(err => {
             console.log("Error in datamodel :" + err)
